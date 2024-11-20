@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlinParcelize)
 }
 
 android {
     namespace = "infor.c14220016.latihansp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "infor.c14220016.latihansp"
