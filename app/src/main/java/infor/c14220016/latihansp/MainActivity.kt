@@ -75,9 +75,7 @@ class MainActivity : AppCompatActivity() {
             arTask = gson.fromJson(isiSP, type)
         }
 
-        if (arTask.size == 0){
-            siapkanData()
-        } else {
+        if (arTask.size != 0){
             arTask.forEach{
                 _nama.add(it.nama)
                 _tanggal.add(it.tanggal)
@@ -109,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         val gson = Gson()
         val editor = sp.edit()
         arTask.clear()
-        val intentEdit = intent.getParcelableExtra<task>("editData", task::class.java)
+        var intentEdit = intent.getParcelableExtra<task>("editData", task::class.java)
 
         for (position: Int in _nama.indices){
             var data = task(
@@ -122,7 +120,7 @@ class MainActivity : AppCompatActivity() {
 
 
             if (intentEdit != null) {
-                val intentPos = intent.getIntExtra("pos", -1)
+                var intentPos = intent.getIntExtra("pos", -1)
                 Log.d("MainActivity", "pos: ${intentPos}")
                 Log.d("MainActivity", "position: ${position}")
                 if (intentPos != -1) {
@@ -136,6 +134,8 @@ class MainActivity : AppCompatActivity() {
                         )
                     }
                 }
+                intent.removeExtra("editData")
+                intent.removeExtra("pos")
             }
             arTask.add(data)
         }
@@ -168,33 +168,14 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun dataProgress(pos: Int) {
-                AlertDialog.Builder(this@MainActivity)
-                    .setTitle("KERJAKAN TASK")
-                    .setMessage("Apakah Benar Data " + _nama[pos]+" akan diprogress ?")
-                    .setPositiveButton(
-                        "PROGRESS",
-                        DialogInterface.OnClickListener { dialog, which ->
+                if (_status.get(pos) == "Kerjakan") {
+                    _status.set(pos, "Selesaikan")
+                } else if (_status.get(pos) == "Selesaikan") {
+                    _status.set(pos, "Done")
+                }
 
-                            if (_status.get(pos) == "Kerjakan") {
-                                _status.set(pos, "Selesaikan")
-                            } else if (_status.get(pos) == "Selesaikan") {
-                                _status.set(pos, "Done")
-                            }
-
-                            tambahData()
-                            tampilkanData()
-                        }
-                    )
-                    .setNegativeButton(
-                        "BATAL",
-                        DialogInterface.OnClickListener { dialog, which ->
-                            Toast.makeText(
-                                this@MainActivity,
-                                "Data Batal Dihapus",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    ).show()
+                tambahData()
+                tampilkanData()
             }
 
             override fun delData(pos: Int) {
