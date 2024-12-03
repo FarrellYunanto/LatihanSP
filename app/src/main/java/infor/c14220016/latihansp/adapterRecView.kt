@@ -46,6 +46,10 @@ class adapterRecView(private val listtask: ArrayList<task>): RecyclerView
         holder._kerjakanBtn.setOnClickListener{
             onItemClickCallback.dataProgress(position)
         }
+
+        holder._ubahBtn.setOnClickListener{
+            onItemClickCallback.editData(position)
+        }
     }
 
     override fun getItemCount(): Int {

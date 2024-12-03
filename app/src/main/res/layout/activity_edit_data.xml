@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditData">
+
+    <TextView
+        android:paddingBottom="16dp"
+        android:id="@+id/namaText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NamaTask"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/namaInput"
+        android:layout_marginLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#d4d4d4"
+        app:layout_constraintLeft_toRightOf="@id/namaText"
+        app:layout_constraintTop_toTopOf="@id/namaText"
+        app:layout_constraintBottom_toBottomOf="@id/namaText"
+        android:hint="__________________________"/>
+
+    <TextView
+        android:paddingBottom="16dp"
+        android:id="@+id/tanggalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tanggal"
+        app:layout_constraintTop_toBottomOf="@id/namaText"
+        app:layout_constraintLeft_toLeftOf="@id/namaText"/>
+
+    <EditText
+        android:id="@+id/tanggalInput"
+        android:layout_marginLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#d4d4d4"
+        app:layout_constraintLeft_toRightOf="@id/tanggalText"
+        app:layout_constraintTop_toTopOf="@id/tanggalText"
+        app:layout_constraintBottom_toBottomOf="@id/tanggalText"
+        android:hint="dd/mm/yyyy"/>
+
+
+
+    <TextView
+        android:paddingBottom="16dp"
+
+        android:id="@+id/kategoriText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kategori"
+        app:layout_constraintLeft_toLeftOf="@id/tanggalText"
+        app:layout_constraintTop_toBottomOf="@id/tanggalText"/>
+
+    <EditText
+        android:id="@+id/kategoriInput"
+        android:layout_marginLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#d4d4d4"
+        app:layout_constraintLeft_toRightOf="@id/kategoriText"
+        app:layout_constraintTop_toTopOf="@id/kategoriText"
+        app:layout_constraintBottom_toBottomOf="@id/kategoriText"
+        android:hint="__________________________"/>
+
+    <TextView
+        android:id="@+id/deskripsiText"
+        android:paddingBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deskripsi"
+        app:layout_constraintLeft_toLeftOf="@id/kategoriText"
+        app:layout_constraintTop_toBottomOf="@id/kategoriText"/>
+
+    <EditText
+        android:id="@+id/deskripsiInput"
+        android:layout_marginLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#d4d4d4"
+        app:layout_constraintTop_toBottomOf="@id/deskripsiText"
+        app:layout_constraintLeft_toLeftOf="@id/deskripsiText"
+        android:hint="__________________________"/>
+
+    <Button
+        android:id="@+id/confirmBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deskripsiInput" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

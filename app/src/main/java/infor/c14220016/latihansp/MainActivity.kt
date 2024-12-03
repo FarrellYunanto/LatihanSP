@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
 
         tambahData()
         tampilkanData()
+
     }
 
     fun siapkanData(){
@@ -108,16 +109,37 @@ class MainActivity : AppCompatActivity() {
         val gson = Gson()
         val editor = sp.edit()
         arTask.clear()
+        val intentEdit = intent.getParcelableExtra<task>("editData", task::class.java)
+
         for (position: Int in _nama.indices){
-            val data = task(
+            var data = task(
                 _nama[position],
                 _tanggal[position],
                 _kategori[position],
                 _deskripsi[position],
                 _status[position]
             )
+
+
+            if (intentEdit != null) {
+                val intentPos = intent.getIntExtra("pos", -1)
+                Log.d("MainActivity", "pos: ${intentPos}")
+                Log.d("MainActivity", "position: ${position}")
+                if (intentPos != -1) {
+                    if (intentPos == position){
+                        data = task(
+                            intentEdit.nama,
+                            intentEdit.tanggal,
+                            intentEdit.kategori,
+                            intentEdit.deskripsi,
+                            intentEdit.status
+                        )
+                    }
+                }
+            }
             arTask.add(data)
         }
+
         val json = gson.toJson(arTask)
         editor.putString("spTask", json)
         editor.apply()
@@ -130,7 +152,19 @@ class MainActivity : AppCompatActivity() {
 
         adapterTask.setOnItemClickCallback(object: adapterRecView.OnItemClickCallback{
             override fun editData(pos: Int) {
+                val intent = Intent(this@MainActivity, EditData::class.java)
+                intent.putExtra("editData", task(
+                    _nama[pos],
+                    _tanggal[pos],
+                    _kategori[pos],
+                    _deskripsi[pos],
+                    _status[pos]
+                )
+                )
 
+                intent.putExtra("pos", pos)
+
+                startActivity(intent)
             }
 
             override fun dataProgress(pos: Int) {
