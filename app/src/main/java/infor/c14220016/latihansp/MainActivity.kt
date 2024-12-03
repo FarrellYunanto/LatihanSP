@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         )
         _kategori = mutableListOf("Kat 1", "Kat 2", "Kat 3")
         _deskripsi = mutableListOf("Des 1", "Des 2", "Des 3")
-        _status = mutableListOf("Stat 1", "Stat 2", "Stat 3")
+        _status = mutableListOf("Kerjakan", "Kerjakan", "Kerjakan")
     }
 
     fun tambahData(){
@@ -102,6 +102,36 @@ class MainActivity : AppCompatActivity() {
         _rvTask.adapter = adapterTask
 
         adapterTask.setOnItemClickCallback(object: adapterRecView.OnItemClickCallback{
+            override fun dataProgress(pos: Int) {
+                AlertDialog.Builder(this@MainActivity)
+                    .setTitle("KERJAKAN TASK")
+                    .setMessage("Apakah Benar Data " + _nama[pos]+" akan diprogress ?")
+                    .setPositiveButton(
+                        "PROGRESS",
+                        DialogInterface.OnClickListener { dialog, which ->
+
+                            if (_status.get(pos) == "Kerjakan") {
+                                _status.set(pos, "Selesaikan")
+                            } else if (_status.get(pos) == "Selesaikan") {
+                                _status.set(pos, "Done")
+                            }
+
+                            tambahData()
+                            tampilkanData()
+                        }
+                    )
+                    .setNegativeButton(
+                        "BATAL",
+                        DialogInterface.OnClickListener { dialog, which ->
+                            Toast.makeText(
+                                this@MainActivity,
+                                "Data Batal Dihapus",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    ).show()
+            }
+
             override fun delData(pos: Int) {
                 AlertDialog.Builder(this@MainActivity)
                     .setTitle("HAPUS DATA")

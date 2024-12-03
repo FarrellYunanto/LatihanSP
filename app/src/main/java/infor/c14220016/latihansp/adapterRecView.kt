@@ -1,5 +1,6 @@
 package infor.c14220016.latihansp
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,9 +27,24 @@ class adapterRecView(private val listtask: ArrayList<task>): RecyclerView
         holder._deskripsiTask.setText(task.deskripsi)
         holder._tanggalTask.setText(task.tanggal.toString())
         holder._kategoriTask.setText(task.kategori)
+        holder._kerjakanBtn.setText(task.status)
+
+        if (holder._kerjakanBtn.text == "Done"){
+            holder._kerjakanBtn.setBackgroundColor(Color.GRAY)
+//            holder._hapusBtn.setBackgroundColor(Color.GRAY)
+            holder._ubahBtn.setBackgroundColor(Color.GRAY)
+
+            holder._kerjakanBtn.isEnabled = false
+//            holder._hapusBtn.isEnabled = false
+            holder._ubahBtn.isEnabled = false
+        }
 
         holder._hapusBtn.setOnClickListener {
             onItemClickCallback.delData(position)
+        }
+
+        holder._kerjakanBtn.setOnClickListener{
+            onItemClickCallback.dataProgress(position)
         }
     }
 
@@ -40,6 +56,7 @@ class adapterRecView(private val listtask: ArrayList<task>): RecyclerView
 
     interface OnItemClickCallback {
 //        fun onItemClicked(data:task)
+        fun dataProgress(pos:Int)
         fun delData(pos:Int)
     }
 
