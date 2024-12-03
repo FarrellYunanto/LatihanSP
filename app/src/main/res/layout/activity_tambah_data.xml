@@ -45,7 +45,7 @@
         app:layout_constraintLeft_toRightOf="@id/tanggalText"
         app:layout_constraintTop_toTopOf="@id/tanggalText"
         app:layout_constraintBottom_toBottomOf="@id/tanggalText"
-        android:hint="__________________________"/>
+        android:hint="dd/mm/yyyy"/>
 
 
 
@@ -88,6 +88,14 @@
         app:layout_constraintTop_toBottomOf="@id/deskripsiText"
         app:layout_constraintLeft_toLeftOf="@id/deskripsiText"
         android:hint="__________________________"/>
+
+    <Button
+        android:id="@+id/confirmBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deskripsiInput" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

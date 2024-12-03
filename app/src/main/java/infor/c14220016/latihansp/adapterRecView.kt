@@ -56,6 +56,7 @@ class adapterRecView(private val listtask: ArrayList<task>): RecyclerView
 
     interface OnItemClickCallback {
 //        fun onItemClicked(data:task)
+        fun editData(pos:Int)
         fun dataProgress(pos:Int)
         fun delData(pos:Int)
     }

@@ -1,8 +1,11 @@
 package infor.c14220016.latihansp
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import java.util.Date
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.text.DecimalFormat
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +41,29 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        var _addButton = findViewById<ImageButton>(R.id.addBtn)
+        val intentData = intent.getParcelableExtra<task>("entryData", task::class.java)
+
+        if (intentData != null){
+            _nama.add(intentData.nama)
+            _tanggal.add(intentData.tanggal)
+            _kategori.add(intentData.kategori)
+            _deskripsi.add(intentData.deskripsi)
+            _status.add(intentData.status)
+
+            Log.d("MainActivity", "Nama: ${intentData.nama}")
+            Log.d("MainActivity", "Tanggal: ${intentData.tanggal}")
+            Log.d("MainActivity", "Kategori: ${intentData.kategori}")
+            Log.d("MainActivity", "Deskripsi: ${intentData.deskripsi}")
+            Log.d("MainActivity", "Status: ${intentData.status}")
+
+        }
+
+        _addButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, TambahData::class.java)
+            startActivity(intent)
         }
 
         _rvTask = findViewById<RecyclerView>(R.id.rvTasks)
@@ -102,6 +129,10 @@ class MainActivity : AppCompatActivity() {
         _rvTask.adapter = adapterTask
 
         adapterTask.setOnItemClickCallback(object: adapterRecView.OnItemClickCallback{
+            override fun editData(pos: Int) {
+
+            }
+
             override fun dataProgress(pos: Int) {
                 AlertDialog.Builder(this@MainActivity)
                     .setTitle("KERJAKAN TASK")
